@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Calculo
@@ -13,9 +7,13 @@ namespace Calculo
     public partial class Form1 : Form
     {
         List<long> lista = new List<long>();
+        double resto = 0;
+        string quociente;
         public Form1()
         {
             InitializeComponent();
+            label4.Visible = false;
+            label5.Visible = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,8 +32,14 @@ namespace Calculo
         {
             try
             {
-                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                     e.Handled = true;
+                else*/ if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                    label5.Visible = true;
+                }
+
 
                 if (e.KeyChar == (char)13)
                     PopularPanel(int.Parse(textBox2.Text));
@@ -366,8 +370,7 @@ namespace Calculo
                 {
                     //Briot Ruffini
                     long[] itens = lista.ToArray();
-                    double raiz = double.Parse(textBox1.Text.Replace(",", ".")), termoInde = double.Parse(textBox3.Text.Replace(",", ".")), resto = 0;
-                    string quociente;
+                    double raiz = double.Parse(textBox1.Text.Replace(",", ".")), termoInde = double.Parse(textBox3.Text.Replace(",", "."));
                     switch (lista.Count)
                     {
                         case 2:
@@ -408,6 +411,7 @@ namespace Calculo
                         MessageBox.Show("O valor do resto é diferente de 0 ! \nO valor do resto é:" + resto, "Resto diferente de 0", MessageBoxButtons.OK, MessageBoxIcon.Warning);  
                     } 
                 }
+                MessageBox.Show("O valor do resto é: " + resto + "\nO quociente é: " + quociente, "Valores calculados", MessageBoxButtons.OK);
             }
             catch (Exception)
             {
@@ -422,7 +426,10 @@ namespace Calculo
                 if (e.KeyChar == '-' && textBox3.SelectionStart == 0)
                     e.Handled = false;
                 else if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
                     e.Handled = true;
+                    label4.Visible = true;
+                }
             }
             catch(Exception)
             {
