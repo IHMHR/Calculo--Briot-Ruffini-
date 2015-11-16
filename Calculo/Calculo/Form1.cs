@@ -436,5 +436,18 @@ namespace Calculo
                 MessageBox.Show("Me desculpe, entretanto ocorreu um erro inexperado. \nTalvez seja sua culpa!", "Erro Desconhecido", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /*if (e.KeyChar.Equals(char.IsLetter))
+                e.Handled = true;*/
+            if (char.IsLetter(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MessageBox.Show("Igor Martinelli Ramos \nMaria Clara Campos \nRenan Caetano Vargas \nEnio Augusto Goulart", "Desenvolvido por", MessageBoxButtons.OK);
+        }
     }
 }
